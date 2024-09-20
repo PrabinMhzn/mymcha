@@ -2,18 +2,21 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+
 import Link from "next/link";
 import { Loader2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/hooks/use-toast";
 
 export default function ArtistSignup() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -54,12 +57,13 @@ export default function ArtistSignup() {
     // For this example, we'll simulate an API call with a timeout
     setTimeout(() => {
       setIsLoading(false);
-      toast({
-        title: "Application submitted",
-        description:
+      setNotification({
+        type: "success",
+        message:
           "We've received your artist application. We'll review it and get back to you soon!",
       });
-      router.push("/"); // Redirect to home page after successful submission
+      // Redirect to home page after successful submission
+      setTimeout(() => router.push("/"), 3000);
     }, 2000);
   };
 
@@ -70,6 +74,17 @@ export default function ArtistSignup() {
           <h1 className="text-3xl font-bold text-center mb-8">
             Join Our Artist Community
           </h1>
+          {notification && (
+            <div
+              className={`mb-4 p-4 rounded ${
+                notification.type === "success"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
+            >
+              {notification.message}
+            </div>
+          )}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div>

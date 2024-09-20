@@ -2,17 +2,19 @@ import React from "react";
 import { X } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 
+interface Filters {
+  category: string;
+  priceRange: number[];
+  size: string;
+  artist: string;
+}
+
 interface SidebarProps {
-  filters: {
-    category: string;
-    priceRange: number[];
-    size: string;
-    artist: string;
-  };
+  filters: Filters;
   categories: string[];
   sizes: string[];
   artists: string[];
-  setFilters: React.Dispatch<React.SetStateAction<any>>;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
   isMobileOpen: boolean;
   onMobileClose: () => void;
 }
@@ -26,6 +28,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen,
   onMobileClose,
 }) => {
+  const handleFilterChange = (key: keyof Filters, value: string | number[]) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
+  };
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -64,7 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     value={cat}
                     checked={filters.category === cat}
                     onChange={(e) =>
-                      setFilters({ ...filters, category: e.target.value })
+                      handleFilterChange("category", e.target.value)
                     }
                     className="mr-3 form-radio text-blue-600"
                   />
@@ -82,9 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({
               max={100}
               step={5}
               value={filters.priceRange}
-              onValueChange={(value) =>
-                setFilters({ ...filters, priceRange: value })
-              }
+              onValueChange={(value) => handleFilterChange("priceRange", value)}
             />
             <div className="flex justify-between mt-2 text-sm text-gray-600">
               <span>${filters.priceRange[0]}</span>
@@ -105,10 +109,10 @@ const Sidebar: React.FC<SidebarProps> = ({
                       : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                   }`}
                   onClick={() =>
-                    setFilters({
-                      ...filters,
-                      size: size === filters.size ? "All" : size,
-                    })
+                    handleFilterChange(
+                      "size",
+                      size === filters.size ? "All" : size
+                    )
                   }
                 >
                   {size}
@@ -123,9 +127,7 @@ const Sidebar: React.FC<SidebarProps> = ({
             <select
               className="w-full p-2 border rounded-md bg-white text-gray-700"
               value={filters.artist}
-              onChange={(e) =>
-                setFilters({ ...filters, artist: e.target.value })
-              }
+              onChange={(e) => handleFilterChange("artist", e.target.value)}
             >
               {artists.map((artist) => (
                 <option key={artist} value={artist}>

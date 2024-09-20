@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type ValueKey = "Creativity" | "Community" | "Quality" | "Sustainability";
 
@@ -91,7 +92,7 @@ const AboutSection = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
-            <img
+            <Image
               src="/assets/pexels-3.jpeg"
               alt="About Us"
               className="w-full h-64 object-cover"
@@ -106,9 +107,10 @@ const AboutSection = () => {
                 grown into a vibrant community of artists and art lovers.
               </p>
               <p className="text-gray-600 text-lg">
-                Each piece of apparel tells a story, connecting the artist's
-                vision with the wearer's personality. Join us on this journey as
-                we continue to support artists and bring unique designs to life.
+                Each piece of apparel tells a story, connecting the
+                artist&apos;s vision with the wearer&apos;s personality. Join us
+                on this journey as we continue to support artists and bring
+                unique designs to life.
               </p>
             </div>
           </motion.div>

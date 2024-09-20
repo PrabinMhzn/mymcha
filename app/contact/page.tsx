@@ -11,9 +11,9 @@ const ContactPage = () => {
         <div className="md:w-1/2">
           <h2 className="text-2xl font-semibold mb-4">Get in Touch</h2>
           <p className="mb-6 text-gray-600">
-            We'd love to hear from you. Whether you have a question about our
-            products, artists, or anything else, our team is ready to answer all
-            your questions.
+            We&apos;d love to hear from you. Whether you have a question about
+            our products, artists, or anything else, our team is ready to answer
+            all your questions.
           </p>
 
           <div className="space-y-4">

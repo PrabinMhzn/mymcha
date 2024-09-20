@@ -1,6 +1,7 @@
 import React from "react";
 import { Product } from "@/types/product";
 import { ShoppingCart } from "lucide-react";
+import Image from "next/image";
 
 interface ProductCardProps {
   product: Product;
@@ -10,7 +11,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
       <div className="relative">
-        <img
+        <Image
           src={product.image}
           alt={product.name}
           className="w-full h-48 object-cover"

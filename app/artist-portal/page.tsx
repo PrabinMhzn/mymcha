@@ -15,20 +15,14 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  BarChart,
-  DollarSign,
-  ShoppingBag,
-  TrendingUp,
-  Upload,
-  User,
-} from "lucide-react";
+import { DollarSign, ShoppingBag, TrendingUp, User } from "lucide-react";
 
 export default function ArtistPortal() {
   const [name, setName] = useState("John Doe");
   const [bio, setBio] = useState(
     "I am a passionate artist specializing in abstract and geometric designs. My work is inspired by urban landscapes and natural patterns."
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [designs, setDesigns] = useState([
     {
       id: 1,

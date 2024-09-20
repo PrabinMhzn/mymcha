@@ -159,9 +159,9 @@ export default function ArtistsPage() {
               <h3 className="text-2xl font-bold mb-4">{artists[0].name}</h3>
               <p className="text-gray-600 mb-4">{artists[0].description}</p>
               <p className="mb-4">
-                "I find inspiration in the chaos and beauty of city life. My
+                I find inspiration in the chaos and beauty of city life. My
                 designs aim to capture the energy and diversity of urban
-                environments, translating them into wearable art."
+                environments, translating them into wearable art.
               </p>
               <div className="flex items-center mb-4">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -178,7 +178,7 @@ export default function ArtistsPage() {
                 href={`/artists/${artists[0].id}`}
                 className="inline-flex items-center bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors"
               >
-                Explore {artists[0].name}'s Collection
+                Explore {artists[0].name}&apos;s Collection
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </div>
