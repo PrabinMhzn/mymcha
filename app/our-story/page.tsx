@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+type ValueKey = "Creativity" | "Community" | "Quality" | "Sustainability";
+
 const AboutSection = () => {
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -11,9 +13,9 @@ const AboutSection = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-5xl font-bold mb-8 text-center text-gray-800"
+          className="text-5xl font-bold mb-16 text-center text-gray-800"
         >
-          About Mymcha
+          About Us
         </motion.h1>
 
         <motion.p
@@ -46,35 +48,40 @@ const AboutSection = () => {
               Our Values
             </h3>
             <ul className="space-y-3 text-gray-600">
-              {["Creativity", "Community", "Quality", "Sustainability"].map(
-                (value, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
-                    className="flex items-center"
+              {(
+                [
+                  "Creativity",
+                  "Community",
+                  "Quality",
+                  "Sustainability",
+                ] as const
+              ).map((value, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 + index * 0.1, duration: 0.3 }}
+                  className="flex items-center"
+                >
+                  <svg
+                    className="w-6 h-6 mr-2 text-green-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <svg
-                      className="w-6 h-6 mr-2 text-green-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      ></path>
-                    </svg>
-                    <span>
-                      <strong>{value}:</strong> {getValueDescription(value)}
-                    </span>
-                  </motion.li>
-                )
-              )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <span>
+                    <strong>{value}:</strong> {getValueDescription(value)}
+                  </span>
+                </motion.li>
+              ))}
             </ul>
           </motion.div>
 
@@ -94,8 +101,8 @@ const AboutSection = () => {
                 Our Story
               </h2>
               <p className="text-gray-600 mb-4 text-lg">
-                Founded in [Year], MYMCHA started as a small project fueled by
-                passion for art and fashion. What began as a simple idea has
+                Founded in 2015, Mymcha started as a small project fueled by
+                passion for printing as an art. What began as a simple idea has
                 grown into a vibrant community of artists and art lovers.
               </p>
               <p className="text-gray-600 text-lg">
@@ -119,30 +126,7 @@ const AboutSection = () => {
           <p className="text-xl text-gray-600 mb-8">
             Follow us on social media and be part of our creative family!
           </p>
-          <div className="flex justify-center space-x-4 mb-8">
-            {["facebook", "twitter", "instagram"].map((social, index) => (
-              <a
-                key={index}
-                href={`https://${social}.com`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <svg
-                  className="w-8 h-8"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </a>
-            ))}
-          </div>
+
           <a
             href="/artist-signup"
             className="bg-black text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-800 transition duration-300 transform hover:scale-105 inline-block"
@@ -155,8 +139,8 @@ const AboutSection = () => {
   );
 };
 
-const getValueDescription = (value) => {
-  const descriptions = {
+const getValueDescription = (value: ValueKey): string => {
+  const descriptions: Record<ValueKey, string> = {
     Creativity: "We celebrate artistic expression in all forms",
     Community:
       "We foster a supportive environment for artists and customers alike",
