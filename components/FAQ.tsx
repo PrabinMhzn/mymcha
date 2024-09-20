@@ -10,9 +10,9 @@ import {
 
 const faqs = [
   {
-    question: "What is Mymcha?",
+    question: "Why Mymcha?",
     answer:
-      "MYMCHA is an online platform that connects independent artists with customers looking for unique, artist-designed apparel.",
+      "Mymcha is an platform that connects independent artists with customers looking for unique, artist-designed apparel.",
   },
   {
     question: "How can I contact customer support?",
@@ -45,10 +45,12 @@ const FAQAccordion = () => {
           <AccordionItem
             key={index}
             value={`item-${index}`}
-            className="border border-gray-200 rounded-lg overflow-hidden"
+            className="border border-gray-200 rounded-lg overflow-hidden "
           >
             <AccordionTrigger className="px-6 py-4 hover:bg-gray-50 transition-colors">
-              <span className="text-lg font-semibold">{faq.question}</span>
+              <span className="text-lg font-semibold text-center">
+                {faq.question}
+              </span>
             </AccordionTrigger>
             <AccordionContent className="px-6 py-4 bg-rose-50">
               <p className="text-gray-700">{faq.answer}</p>
