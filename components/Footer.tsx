@@ -34,7 +34,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about/artists" className="hover:text-gray-300">
+                <Link href="/artists" className="hover:text-gray-300">
                   Artists
                 </Link>
               </li>
@@ -72,7 +72,10 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Connect</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/connect/instagram" className="hover:text-gray-300">
+                <Link
+                  href="https://www.instagram.com/mymcha_teez/"
+                  className="hover:text-gray-300"
+                >
                   Instagram
                 </Link>
               </li>
@@ -90,7 +93,24 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 text-center">
-          <p>&copy; 2019 Mymcha. All rights reserved.</p>
+          <p className=" mb-4">&copy; 2019 Mymcha. All rights reserved.</p>
+          <ul className="flex justify-center space-x-6 text-xs font-light">
+            <li>
+              <Link href="/terms" className="hover:text-gray-300">
+                Terms
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy" className="hover:text-gray-300">
+                Privacy
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-gray-300">
+                Contact
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

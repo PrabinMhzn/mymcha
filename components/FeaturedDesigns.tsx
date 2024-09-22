@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
+const featuredDesigns = [
+  { id: 1, src: "/assets/pexels-5.jpeg", alt: "Featured Design 1" },
+  { id: 2, src: "/assets/pexels-2.jpeg", alt: "Featured Design 2" },
+  { id: 3, src: "/assets/pexels-3.jpeg", alt: "Featured Design 3" },
+  { id: 4, src: "/assets/pexels-4.jpeg", alt: "Featured Design 4" },
+];
+
 export default function FeaturedDesigns() {
   return (
     <section className="py-16">
@@ -9,18 +16,18 @@ export default function FeaturedDesigns() {
           Featured Designs
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="group relative">
+          {featuredDesigns.map((design) => (
+            <div key={design.id} className="group relative">
               <Image
-                src={`/assets/pexels-2.jpeg`}
-                alt={`Featured Design ${i}`}
+                src={design.src}
+                alt={design.alt}
                 width={300}
                 height={400}
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center transition-all duration-300">
                 <Link
-                  href={`/product/${i}`}
+                  href={`/product/${design.id}`}
                   className="bg-white text-black px-4 py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 >
                   View Design

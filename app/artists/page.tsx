@@ -201,31 +201,6 @@ export default function ArtistsPage() {
           </Link>
         </section>
       </main>
-
-      <footer className="bg-black text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2023 MYMCHA. All rights reserved.</p>
-          <nav className="mt-4">
-            <ul className="flex justify-center space-x-6">
-              <li>
-                <Link href="/terms" className="hover:text-gray-300">
-                  Terms
-                </Link>
-              </li>
-              <li>
-                <Link href="/privacy" className="hover:text-gray-300">
-                  Privacy
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-gray-300">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </footer>
     </div>
   );
 }

@@ -1,37 +1,46 @@
+// components/ProductCard.tsx
 import React from "react";
 import { Product } from "@/types/product";
-import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 
 interface ProductCardProps {
   product: Product;
+  viewMode: "grid" | "list";
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
-      <div className="relative">
+const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode }) => {
+  if (viewMode === "grid") {
+    return (
+      <div className="border rounded-lg overflow-hidden shadow-md hover:scale-110 duration-200 transition-all">
         <Image
           src={product.image}
           alt={product.name}
           className="w-full h-48 object-cover"
         />
-        <div className="absolute top-2 right-2 bg-black text-white px-2 py-1 text-xs rounded-full">
-          {product.category}
+        <div className="p-4">
+          <h3 className="text-lg font-semibold">{product.name}</h3>
+          <p className="text-gray-600">${product.price.toFixed(2)}</p>
+          {/* Add more product details as needed */}
         </div>
       </div>
-      <div className="p-4">
-        <h3 className="text-lg font-semibold truncate">{product.name}</h3>
-        <p className="text-sm text-gray-600 mb-2">by {product.artist}</p>
-        <div className="flex justify-between items-center">
-          <p className="text-xl font-bold">${product.price.toFixed(2)}</p>
-          <button className="bg-black text-white p-2 rounded-full hover:bg-gray-800 transition-colors duration-300">
-            <ShoppingCart size={20} />
-          </button>
+    );
+  } else {
+    return (
+      <div className="flex border rounded-lg overflow-hidden shadow-md">
+        <Image
+          src={product.image}
+          alt={product.name}
+          className="w-1/3 object-cover"
+          fill
+        />
+        <div className="p-4 flex-1">
+          <h3 className="text-lg font-semibold">{product.name}</h3>
+          <p className="text-gray-600">${product.price.toFixed(2)}</p>
+          {/* Add more product details as needed */}
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ProductCard;

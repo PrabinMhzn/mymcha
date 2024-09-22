@@ -1,7 +1,8 @@
+// pages/shop.tsx
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { Filter, ChevronDown, ChevronUp } from "lucide-react";
+import { Filter, Grid, List } from "lucide-react";
 import { Product } from "@/types/product";
 import Sidebar from "@/components/Sidebar";
 import ProductCard from "@/components/ProductCard";
@@ -15,7 +16,7 @@ export default function Shop() {
     artist: "All",
   });
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   useEffect(() => {
     fetch("/products.json")
@@ -50,92 +51,87 @@ export default function Shop() {
     );
   }, [filters, products]);
 
-  const groupedProducts = useMemo(() => {
-    const grouped = filteredProducts.reduce((acc, product) => {
-      if (!acc[product.category]) {
-        acc[product.category] = [];
-      }
-      acc[product.category].push(product);
-      return acc;
-    }, {} as Record<string, Product[]>);
-
-    return Object.entries(grouped).sort(([a], [b]) => a.localeCompare(b));
-  }, [filteredProducts]);
-
-  const toggleCategory = (category: string) => {
-    setExpandedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-  };
-
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Our Collection</h1>
+
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
-          <Sidebar
-            filters={filters}
-            categories={categories}
-            sizes={sizes}
-            artists={artists}
-            setFilters={setFilters}
-            isMobileOpen={isMobileSidebarOpen}
-            onMobileClose={() => setIsMobileSidebarOpen(false)}
-          />
+          <aside className="lg:w-1/4">
+            <Sidebar
+              filters={filters}
+              categories={categories}
+              sizes={sizes}
+              artists={artists}
+              setFilters={setFilters}
+              isMobileOpen={isMobileSidebarOpen}
+              onMobileClose={() => setIsMobileSidebarOpen(false)}
+            />
+          </aside>
 
           {/* Main Content */}
-
-          <main className="lg:flex-1">
-            <h1 className="text-4xl font-bold mb-8 text-center bg-black text-white py-2 uppercase ">
-              Our Collection
-            </h1>
-
-            <div className="bg-white shadow-md p-6">
-              <div className="mb-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <main className="lg:w-3/4">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              {/* Toolbar */}
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
                 <button
                   className="lg:hidden w-full sm:w-auto bg-black text-white px-4 py-2 rounded-full flex items-center justify-center"
                   onClick={() => setIsMobileSidebarOpen(true)}
                 >
                   <Filter className="mr-2" size={20} /> Filters
                 </button>
-                <div className="flex items-center gap-4 w-full sm:w-auto">
-                  <h2 className="text-2xl font-semibold">
-                    {filteredProducts.length} Products
-                  </h2>
+                <h2 className="text-2xl font-semibold">
+                  {filteredProducts.length} Products
+                </h2>
+                <div className="flex items-center gap-4">
                   <select className="border rounded-md p-2 bg-white">
                     <option>Sort by: Featured</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
                     <option>Newest</option>
                   </select>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setViewMode("grid")}
+                      className={`p-2 rounded ${
+                        viewMode === "grid" ? "bg-gray-200" : ""
+                      }`}
+                      aria-label="Grid view"
+                    >
+                      <Grid size={20} />
+                    </button>
+                    <button
+                      onClick={() => setViewMode("list")}
+                      className={`p-2 rounded ${
+                        viewMode === "list" ? "bg-gray-200" : ""
+                      }`}
+                      aria-label="List view"
+                    >
+                      <List size={20} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Product Display by Category */}
-              {groupedProducts.map(([category, products]) => (
-                <div key={category} className="mb-8">
-                  <button
-                    className="flex items-center justify-between w-full text-left text-2xl font-bold mb-4 bg-gray-100 p-4 rounded-lg"
-                    onClick={() => toggleCategory(category)}
-                  >
-                    <span>{category}</span>
-                    {expandedCategories.includes(category) ? (
-                      <ChevronUp size={24} />
-                    ) : (
-                      <ChevronDown size={24} />
-                    )}
-                  </button>
-                  {expandedCategories.includes(category) && (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+              {/* Product Display */}
+              <div
+                className={`
+                ${
+                  viewMode === "grid"
+                    ? "grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"
+                    : "space-y-6"
+                }
+              `}
+              >
+                {filteredProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    viewMode={viewMode}
+                  />
+                ))}
+              </div>
             </div>
           </main>
         </div>

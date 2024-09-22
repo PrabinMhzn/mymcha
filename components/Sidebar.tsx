@@ -1,20 +1,26 @@
+// components/Sidebar.tsx
 import React from "react";
 import { X } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 
-interface Filters {
-  category: string;
-  priceRange: number[];
-  size: string;
-  artist: string;
-}
-
 interface SidebarProps {
-  filters: Filters;
+  filters: {
+    category: string;
+    priceRange: number[];
+    size: string;
+    artist: string;
+  };
   categories: string[];
   sizes: string[];
   artists: string[];
-  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  setFilters: React.Dispatch<
+    React.SetStateAction<{
+      category: string;
+      priceRange: number[];
+      size: string;
+      artist: string;
+    }>
+  >;
   isMobileOpen: boolean;
   onMobileClose: () => void;
 }
@@ -28,7 +34,10 @@ const Sidebar: React.FC<SidebarProps> = ({
   isMobileOpen,
   onMobileClose,
 }) => {
-  const handleFilterChange = (key: keyof Filters, value: string | number[]) => {
+  const handleFilterChange = (
+    key: keyof typeof filters,
+    value: string | number[]
+  ) => {
     setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
   };
 
@@ -44,23 +53,21 @@ const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar */}
       <aside
-        className={`lg:w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out overflow-hidden ${
-          isMobileOpen
-            ? "fixed inset-y-0 left-0 z-50 w-80 translate-x-0"
-            : "translate-x-full"
-        } lg:relative lg:translate-x-0`}
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto
+          ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} 
+          lg:sticky lg:top-0 lg:translate-x-0 lg:h-screen`}
       >
-        <div className="flex justify-between items-center p-6 border-b">
-          <h2 className="text-2xl font-semibold">Filters</h2>
+        <div className="flex justify-between items-center p-4 border-b">
+          <h2 className="text-xl font-semibold">Filters</h2>
           <button onClick={onMobileClose} className="lg:hidden">
             <X size={24} />
           </button>
         </div>
 
-        <div className="p-6 space-y-8 overflow-y-auto h-[calc(100%-5rem)]">
+        <div className="p-4 space-y-6">
           {/* Category Filter */}
           <div>
-            <h3 className="font-semibold mb-4 text-lg">Category</h3>
+            <h3 className="font-semibold mb-3 text-lg">Category</h3>
             <div className="space-y-2">
               {categories.map((cat) => (
                 <label key={cat} className="flex items-center cursor-pointer">
@@ -82,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Price Range Filter */}
           <div>
-            <h3 className="font-semibold mb-4 text-lg">Price Range</h3>
+            <h3 className="font-semibold mb-3 text-lg">Price Range</h3>
             <Slider
               min={0}
               max={100}
@@ -98,12 +105,12 @@ const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Size Filter */}
           <div>
-            <h3 className="font-semibold mb-4 text-lg">Size</h3>
+            <h3 className="font-semibold mb-3 text-lg">Size</h3>
             <div className="flex flex-wrap gap-2">
               {sizes.map((size) => (
                 <button
                   key={size}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
                     filters.size === size
                       ? "bg-blue-600 text-white"
                       : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -123,7 +130,7 @@ const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Artist Filter */}
           <div>
-            <h3 className="font-semibold mb-4 text-lg">Artist</h3>
+            <h3 className="font-semibold mb-3 text-lg">Artist</h3>
             <select
               className="w-full p-2 border rounded-md bg-white text-gray-700"
               value={filters.artist}

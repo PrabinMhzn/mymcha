@@ -92,11 +92,15 @@ const AboutSection = () => {
             transition={{ delay: 0.3, duration: 0.5 }}
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
-            <Image
-              src="/assets/pexels-3.jpeg"
-              alt="About Us"
-              className="w-full h-64 object-cover"
-            />
+            <div className="relative w-full h-64">
+              <Image
+                src="/assets/pexels-3.jpeg"
+                alt="About Us"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
             <div className="p-8">
               <h2 className="text-3xl font-semibold mb-4 text-gray-800">
                 Our Story

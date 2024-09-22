@@ -1,4 +1,5 @@
 import { Search, ShoppingCart, User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -8,7 +9,13 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
-            MYMCHA
+            <Image
+              src="/assets/logo.png"
+              alt="MYMCHA Logo"
+              width={150} // Adjust this value to match your logo's width
+              height={50} // Adjust this value to match your logo's height
+              priority
+            />
           </Link>
           <nav className="hidden md:flex space-x-12">
             {" "}
