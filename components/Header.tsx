@@ -1,25 +1,30 @@
+"use client";
+
+import { useState } from "react";
 import { Search, ShoppingCart, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import { useCart } from "@/components/CartContext";
+import CartModal from "@/components/CartModal";
 
 const Header = () => {
+  const { cartItems } = useCart();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
   return (
-    <nav className="bg-black text-white py-8">
+    <nav className="bg-black text-white py-4">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
             <Image
               src="/assets/logo.png"
               alt="MYMCHA Logo"
-              width={150} // Adjust this value to match your logo's width
-              height={50} // Adjust this value to match your logo's height
+              width={150}
+              height={50}
               priority
             />
           </Link>
           <nav className="hidden md:flex space-x-12">
-            {" "}
-            {/* Adjusted spacing */}
             <Link href="/shop" className="hover:text-gray-300">
               Shop
             </Link>
@@ -37,13 +42,18 @@ const Header = () => {
             <button aria-label="Search" className="hover:text-gray-300">
               <Search size={20} />
             </button>
-            <Link
-              href="/cart"
+            <button
               aria-label="Cart"
-              className="hover:text-gray-300"
+              className="hover:text-gray-300 relative"
+              onClick={() => setIsCartOpen(true)}
             >
               <ShoppingCart size={20} />
-            </Link>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
             <Link
               href="/login"
               aria-label="User account"
@@ -54,6 +64,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </nav>
   );
 };

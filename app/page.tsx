@@ -4,12 +4,17 @@ import ArtistCommunity from "../components/ArtistCommunity";
 
 import FAQAccordion from "@/components/FAQ";
 
+import MarqueeText from "@/components/MarqueeText";
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <main>
         <Hero />
+        <MarqueeText />
+
         <FeaturedDesigns />
+
         <FAQAccordion />
         <ArtistCommunity />
       </main>
