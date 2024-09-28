@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Search, ShoppingCart, User } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/components/CartContext";
@@ -10,9 +10,50 @@ import CartModal from "@/components/CartModal";
 const Header = () => {
   const { cartItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = 0;
+
+    const controlNavbar = () => {
+      if (typeof window !== "undefined") {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > lastScrollY) {
+          // Scrolling down
+          setIsVisible(false);
+        } else {
+          // Scrolling up
+          setIsVisible(true);
+        }
+
+        lastScrollY = currentScrollY;
+      }
+    };
+
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", controlNavbar);
+
+      // Cleanup function
+      return () => {
+        window.removeEventListener("scroll", controlNavbar);
+      };
+    }
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
-    <nav className="bg-black text-white py-4">
+    <nav
+      ref={headerRef}
+      className={`bg-neutral-950 text-white py-4 fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ${
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold">
@@ -61,8 +102,33 @@ const Header = () => {
             >
               <User size={20} />
             </Link>
+            <button
+              className="md:hidden"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle mobile menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4">
+            <Link href="/shop" className="block py-2 hover:text-gray-300">
+              Shop
+            </Link>
+            <Link href="/artists" className="block py-2 hover:text-gray-300">
+              Artists
+            </Link>
+            <Link href="/our-story" className="block py-2 hover:text-gray-300">
+              Our Story
+            </Link>
+            <Link href="/contact" className="block py-2 hover:text-gray-300">
+              Contact
+            </Link>
+          </div>
+        )}
       </div>
       <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </nav>

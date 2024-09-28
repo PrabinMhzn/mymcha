@@ -10,29 +10,29 @@ import {
 
 const faqs = [
   {
-    question: "Why Mymcha?",
+    question: "How does Mymcha support independent artists?",
     answer:
-      "Mymcha is an platform that connects independent artists with customers looking for unique, artist-designed apparel.",
+      "Mymcha provides a platform for independent artists to showcase and sell their designs on high-quality apparel, reaching a global audience while retaining creative control and earning fair compensation for their work.",
   },
   {
-    question: "How can I contact customer support?",
+    question: "Can I become an artist on Mymcha?",
     answer:
-      "You can contact our customer support via the contact form on our Contact page or by emailing us at info@mymcha.com.",
+      "Yes! We welcome talented artists to join our community. Visit our 'Become an Artist' page to learn about our submission process and requirements.",
   },
   {
-    question: "What payment methods do you accept?",
+    question: "How is the quality of the apparel ensured?",
     answer:
-      "We accept all major credit cards, PayPal, and other secure payment methods.",
+      "We partner with premium apparel manufacturers to ensure high-quality, comfortable garments that do justice to our artists' designs. Each item undergoes quality checks before shipping.",
   },
   {
-    question: "What is your return policy?",
+    question: "Are the designs limited edition?",
     answer:
-      "We offer a 30-day return policy for unworn items. Please refer to our Returns page for detailed information.",
+      "Many of our designs are produced in limited quantities to maintain exclusivity. Check the product description for information on edition sizes.",
   },
   {
-    question: "Do you ship internationally?",
+    question: "How do I care for my Mymcha apparel?",
     answer:
-      "Yes, we ship to many countries worldwide. Shipping costs and delivery times vary depending on the destination.",
+      "Care instructions vary by product. Generally, we recommend washing in cold water and hanging to dry to preserve the print quality. Specific care instructions are included with each item.",
   },
 ];
 

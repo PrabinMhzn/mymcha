@@ -8,7 +8,7 @@ type ValueKey = "Creativity" | "Community" | "Quality" | "Sustainability";
 
 const AboutSection = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen pt-16">
       <div className="container mx-auto px-4 py-16">
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
