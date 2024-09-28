@@ -1,6 +1,5 @@
 import React from "react";
 import ContactForm from "@/components/ContactForm";
-import FAQAccordion from "@/components/FAQ";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import Image from "next/image";
 
