@@ -52,7 +52,7 @@ export default function Shop() {
   }, [filters, products]);
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen mt-16">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">Our Collection</h1>
 
