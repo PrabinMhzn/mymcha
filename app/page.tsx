@@ -10,7 +10,7 @@ import CategoryShowcase from "@/components/CategoryShowcase";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white mt-16">
+    <div className="min-h-screen bg-white mt-12">
       <main>
         <Hero />
         <MarqueeText />

@@ -1,426 +1,272 @@
 [
   {
     "id": 1,
-    "name": "Abstract Sunset Tee",
+    "name": "Sunset Tee",
     "price": 29.99,
-    "image": "/assets/product1.jpg",
-    "category": "Abstract",
+    "image": "https://images.unsplash.com/photo-1517841905240-472988d4e3c6",
+    "category": "T-shirt",
     "artist": "Jane Doe",
     "size": "M"
   },
   {
     "id": 2,
-    "name": "Mountain Vista Hoodie",
+    "name": "Urban Skyline Hoodie",
     "price": 49.99,
-    "image": "/assets/product2.jpg",
-    "category": "Nature",
-    "artist": "John Smith",
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
+    "category": "Hoodie",
+    "artist": "Alex Smith",
     "size": "L"
   },
   {
     "id": 3,
-    "name": "Urban Skyline Tank",
+    "name": "Summer Vibes Tank",
     "price": 24.99,
-    "image": "/assets/product3.jpg",
-    "category": "Urban",
-    "artist": "Alex Johnson",
+    "image": "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
+    "category": "Tank Top",
+    "artist": "Emma Johnson",
     "size": "S"
   },
   {
     "id": 4,
-    "name": "Geometric Shapes Sweater",
+    "name": "City Lights Backpack",
     "price": 39.99,
-    "image": "/assets/product4.jpg",
-    "category": "Abstract",
-    "artist": "Emily Brown",
-    "size": "XL"
-  },
-  {
-    "id": 5,
-    "name": "Floral Paradise Dress",
-    "price": 54.99,
-    "image": "/assets/product5.jpg",
-    "category": "Nature",
-    "artist": "Sophie Lee",
-    "size": "M"
-  },
-  {
-    "id": 6,
-    "name": "Cityscape Denim Jacket",
-    "price": 69.99,
-    "image": "/assets/product6.jpg",
-    "category": "Urban",
-    "artist": "Michael Chen",
-    "size": "L"
-  },
-  {
-    "id": 7,
-    "name": "Cubism Inspired Scarf",
-    "price": 19.99,
-    "image": "/assets/product7.jpg",
-    "category": "Abstract",
-    "artist": "Pablo Rodriguez",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+    "category": "Urban Extra",
+    "artist": "Michael Brown",
     "size": "One Size"
   },
   {
+    "id": 5,
+    "name": "Minimalist White Tee",
+    "price": 19.99,
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+    "category": "T-shirt",
+    "artist": "Sophie Lee",
+    "size": "XS"
+  },
+  {
+    "id": 6,
+    "name": "Graffiti Art Hoodie",
+    "price": 54.99,
+    "image": "https://images.unsplash.com/photo-1512400930990-e0bc0bd809df",
+    "category": "Hoodie",
+    "artist": "Carlos Rodriguez",
+    "size": "XL"
+  },
+  {
+    "id": 7,
+    "name": "Neon Dreams Tank",
+    "price": 29.99,
+    "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
+    "category": "Tank Top",
+    "artist": "Lily Chen",
+    "size": "M"
+  },
+  {
     "id": 8,
-    "name": "Forest Canopy Leggings",
+    "name": "Metro Map Tote",
     "price": 34.99,
-    "image": "/assets/product8.jpg",
-    "category": "Nature",
-    "artist": "Emma Wilson",
-    "size": "S"
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a45",
+    "category": "Urban Extra",
+    "artist": "David Wilson",
+    "size": "One Size"
   },
   {
     "id": 9,
-    "name": "Neon Lights Bomber Jacket",
-    "price": 79.99,
-    "image": "/assets/product9.jpg",
-    "category": "Urban",
-    "artist": "David Kim",
-    "size": "M"
+    "name": "Retro Stripe Tee",
+    "price": 27.99,
+    "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b",
+    "category": "T-shirt",
+    "artist": "Olivia Taylor",
+    "size": "L"
   },
   {
     "id": 10,
-    "name": "Color Splash Crop Top",
-    "price": 22.99,
-    "image": "/assets/product10.jpg",
-    "category": "Abstract",
-    "artist": "Lily Zhang",
-    "size": "S"
-  },
-  {
-    "id": 11,
-    "name": "Mountain Stream Socks",
-    "price": 12.99,
-    "image": "/assets/product11.jpg",
-    "category": "Nature",
-    "artist": "Tom Baker",
+    "name": "Eco Friendly Hoodie",
+    "price": 59.99,
+    "image": "https://images.unsplash.com/photo-1556821840-5a6e18004cab",
+    "category": "Hoodie",
+    "artist": "Ethan Green",
     "size": "M"
   },
   {
+    "id": 11,
+    "name": "Geometric Pattern Tank",
+    "price": 22.99,
+    "image": "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
+    "category": "Tank Top",
+    "artist": "Zoe Martinez",
+    "size": "S"
+  },
+  {
     "id": 12,
-    "name": "Graffiti Art Beanie",
-    "price": 17.99,
-    "image": "/assets/product12.jpg",
-    "category": "Urban",
-    "artist": "Chris Davis",
+    "name": "Urban Camo Cap",
+    "price": 19.99,
+    "image": "https://images.unsplash.com/photo-1521369909029-2afed882baee",
+    "category": "Urban Extra",
+    "artist": "Ryan Park",
     "size": "One Size"
   },
   {
     "id": 13,
-    "name": "Minimalist Lines Blazer",
-    "price": 89.99,
-    "image": "/assets/product13.jpg",
-    "category": "Abstract",
-    "artist": "Nina Patel",
-    "size": "L"
+    "name": "Vintage Logo Tee",
+    "price": 24.99,
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+    "category": "T-shirt",
+    "artist": "Mia Johnson",
+    "size": "XL"
   },
   {
     "id": 14,
-    "name": "Autumn Leaves Shawl",
-    "price": 29.99,
-    "image": "/assets/product14.jpg",
-    "category": "Nature",
-    "artist": "Olivia Green",
-    "size": "One Size"
+    "name": "Cozy Winter Hoodie",
+    "price": 64.99,
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
+    "category": "Hoodie",
+    "artist": "Liam Wilson",
+    "size": "L"
   },
   {
     "id": 15,
-    "name": "Subway Map Tote Bag",
-    "price": 24.99,
-    "image": "/assets/product15.jpg",
-    "category": "Urban",
-    "artist": "Ryan Lee",
-    "size": "One Size"
+    "name": "Yoga Zen Tank",
+    "price": 26.99,
+    "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
+    "category": "Tank Top",
+    "artist": "Ava Garcia",
+    "size": "M"
   },
   {
     "id": 16,
-    "name": "Watercolor Splash Skirt",
-    "price": 39.99,
-    "image": "/assets/product16.jpg",
-    "category": "Abstract",
-    "artist": "Sarah Johnson",
-    "size": "M"
-  },
-  {
-    "id": 17,
-    "name": "Tropical Breeze Shirt",
-    "price": 44.99,
-    "image": "/assets/product17.jpg",
-    "category": "Nature",
-    "artist": "Marco Silva",
-    "size": "XL"
-  },
-  {
-    "id": 18,
-    "name": "Skyscraper Silhouette Tie",
+    "name": "Street Art Laptop Sleeve",
     "price": 29.99,
-    "image": "/assets/product18.jpg",
-    "category": "Urban",
-    "artist": "Jessica Wong",
-    "size": "One Size"
-  },
-  {
-    "id": 19,
-    "name": "Geometric Patterns Scarf",
-    "price": 21.99,
-    "image": "/assets/product19.jpg",
-    "category": "Abstract",
-    "artist": "Ahmed Hassan",
-    "size": "One Size"
-  },
-  {
-    "id": 20,
-    "name": "Wildflower Meadow Dress",
-    "price": 59.99,
-    "image": "/assets/product20.jpg",
-    "category": "Nature",
-    "artist": "Laura Martinez",
-    "size": "S"
-  },
-  {
-    "id": 21,
-    "name": "Street Art Hoodie",
-    "price": 54.99,
-    "image": "/assets/product21.jpg",
-    "category": "Urban",
-    "artist": "Tyler Scott",
-    "size": "L"
-  },
-  {
-    "id": 22,
-    "name": "Abstract Waves Swimsuit",
-    "price": 49.99,
-    "image": "/assets/product22.jpg",
-    "category": "Abstract",
-    "artist": "Zoe Taylor",
-    "size": "M"
-  },
-  {
-    "id": 23,
-    "name": "Pine Forest Sweater",
-    "price": 64.99,
-    "image": "/assets/product23.jpg",
-    "category": "Nature",
-    "artist": "Daniel Brown",
-    "size": "XL"
-  },
-  {
-    "id": 24,
-    "name": "Neon Skyline Cap",
-    "price": 19.99,
-    "image": "/assets/product24.jpg",
-    "category": "Urban",
-    "artist": "Sophia Lee",
-    "size": "One Size"
-  },
-  {
-    "id": 25,
-    "name": "Cubist Portrait Tee",
-    "price": 34.99,
-    "image": "/assets/product25.jpg",
-    "category": "Abstract",
-    "artist": "Isabella Rossi",
-    "size": "S"
-  },
-  {
-    "id": 26,
-    "name": "Rainforest Print Shorts",
-    "price": 29.99,
-    "image": "/assets/product26.jpg",
-    "category": "Nature",
-    "artist": "Lucas Fernandez",
-    "size": "M"
-  },
-  {
-    "id": 27,
-    "name": "Metro Map Scarf",
-    "price": 23.99,
-    "image": "/assets/product27.jpg",
-    "category": "Urban",
-    "artist": "Emma Thompson",
-    "size": "One Size"
-  },
-  {
-    "id": 28,
-    "name": "Mondrian Inspired Dress",
-    "price": 69.99,
-    "image": "/assets/product28.jpg",
-    "category": "Abstract",
-    "artist": "Oliver White",
-    "size": "L"
-  },
-  {
-    "id": 29,
-    "name": "Mountain Sunset Backpack",
-    "price": 39.99,
-    "image": "/assets/product29.jpg",
-    "category": "Nature",
-    "artist": "Ava Garcia",
-    "size": "One Size"
-  },
-  {
-    "id": 30,
-    "name": "City Lights Phone Case",
-    "price": 14.99,
-    "image": "/assets/product30.jpg",
-    "category": "Urban",
-    "artist": "Ethan Clark",
-    "size": "One Size"
-  },
-  {
-    "id": 31,
-    "name": "Abstract Marble Laptop Sleeve",
-    "price": 29.99,
-    "image": "/assets/product31.jpg",
-    "category": "Abstract",
-    "artist": "Mia Johnson",
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+    "category": "Urban Extra",
+    "artist": "Noah Brown",
     "size": "15 inch"
   },
   {
-    "id": 32,
-    "name": "Botanical Garden Kimono",
-    "price": 79.99,
-    "image": "/assets/product32.jpg",
-    "category": "Nature",
-    "artist": "Liam Wilson",
-    "size": "One Size"
+    "id": 17,
+    "name": "Ocean Waves Tee",
+    "price": 32.99,
+    "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b",
+    "category": "T-shirt",
+    "artist": "Emma Thompson",
+    "size": "S"
   },
   {
-    "id": 33,
-    "name": "Urban Camo Joggers",
-    "price": 49.99,
-    "image": "/assets/product33.jpg",
-    "category": "Urban",
-    "artist": "Sofia Rodriguez",
+    "id": 18,
+    "name": "Mountain Explorer Hoodie",
+    "price": 69.99,
+    "image": "https://images.unsplash.com/photo-1512400930990-e0bc0bd809df",
+    "category": "Hoodie",
+    "artist": "Oliver White",
+    "size": "XL"
+  },
+  {
+    "id": 19,
+    "name": "Floral Paradise Tank",
+    "price": 28.99,
+    "image": "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
+    "category": "Tank Top",
+    "artist": "Sophia Lee",
+    "size": "XS"
+  },
+  {
+    "id": 20,
+    "name": "Cityscape Phone Case",
+    "price": 14.99,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a45",
+    "category": "Urban Extra",
+    "artist": "Elijah Davis",
+    "size": "iPhone 12"
+  },
+  {
+    "id": 21,
+    "name": "Artistic Splash Tee",
+    "price": 34.99,
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+    "category": "T-shirt",
+    "artist": "Isabella Rossi",
     "size": "M"
   },
   {
-    "id": 34,
-    "name": "Kandinsky Inspired Socks",
-    "price": 12.99,
-    "image": "/assets/product34.jpg",
-    "category": "Abstract",
-    "artist": "Noah Brown",
-    "size": "One Size"
-  },
-  {
-    "id": 35,
-    "name": "Ocean Waves Scarf",
-    "price": 24.99,
-    "image": "/assets/product35.jpg",
-    "category": "Nature",
-    "artist": "Aria Martinez",
-    "size": "One Size"
-  },
-  {
-    "id": 36,
-    "name": "Subway Tile Pattern Shirt",
-    "price": 39.99,
-    "image": "/assets/product36.jpg",
-    "category": "Urban",
-    "artist": "Elijah Davis",
+    "id": 22,
+    "name": "Tech Geek Hoodie",
+    "price": 59.99,
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
+    "category": "Hoodie",
+    "artist": "Lucas Fernandez",
     "size": "L"
   },
   {
-    "id": 37,
-    "name": "Geometric Fox Print Tee",
-    "price": 29.99,
-    "image": "/assets/product37.jpg",
-    "category": "Abstract",
+    "id": 23,
+    "name": "Sunset Beach Tank",
+    "price": 25.99,
+    "image": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c",
+    "category": "Tank Top",
     "artist": "Charlotte Taylor",
     "size": "S"
   },
   {
-    "id": 38,
-    "name": "Cherry Blossom Cardigan",
-    "price": 59.99,
-    "image": "/assets/product38.jpg",
-    "category": "Nature",
+    "id": 24,
+    "name": "Urban Beats Headphones",
+    "price": 79.99,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+    "category": "Urban Extra",
     "artist": "William Lee",
+    "size": "One Size"
+  },
+  {
+    "id": 25,
+    "name": "Minimalist Line Art Tee",
+    "price": 29.99,
+    "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b",
+    "category": "T-shirt",
+    "artist": "Amelia Wong",
+    "size": "L"
+  },
+  {
+    "id": 26,
+    "name": "Eco Warrior Hoodie",
+    "price": 54.99,
+    "image": "https://images.unsplash.com/photo-1512400930990-e0bc0bd809df",
+    "category": "Hoodie",
+    "artist": "Evelyn Chen",
     "size": "M"
   },
   {
-    "id": 39,
-    "name": "Retro Arcade Sweatshirt",
-    "price": 44.99,
-    "image": "/assets/product39.jpg",
-    "category": "Urban",
-    "artist": "Amelia Wong",
+    "id": 27,
+    "name": "Neon Lights Tank",
+    "price": 27.99,
+    "image": "https://images.unsplash.com/photo-1469334031218-e382a71b716b",
+    "category": "Tank Top",
+    "artist": "Benjamin Kim",
     "size": "XL"
   },
-
   {
-    "id": 41,
-    "name": "Succulent Garden Tote",
-    "price": 34.99,
-    "image": "/assets/product41.jpg",
-    "category": "Nature",
-    "artist": "Evelyn Chen",
-    "size": "One Size"
-  },
-  {
-    "id": 42,
-    "name": "Neon Sign Earrings",
-    "price": 19.99,
-    "image": "/assets/product42.jpg",
-    "category": "Urban",
-    "artist": "Benjamin Kim",
-    "size": "One Size"
-  },
-  {
-    "id": 43,
-    "name": "Minimalist Shapes Wallet",
-    "price": 24.99,
-    "image": "/assets/product43.jpg",
-    "category": "Abstract",
+    "id": 28,
+    "name": "Metro Chic Wallet",
+    "price": 39.99,
+    "image": "https://images.unsplash.com/photo-1553062407-98eeb64c6a45",
+    "category": "Urban Extra",
     "artist": "Scarlett Johnson",
     "size": "One Size"
   },
   {
-    "id": 44,
-    "name": "Autumn Leaf Brooch",
-    "price": 14.99,
-    "image": "/assets/product44.jpg",
-    "category": "Nature",
+    "id": 29,
+    "name": "Retro Gaming Tee",
+    "price": 31.99,
+    "image": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab",
+    "category": "T-shirt",
     "artist": "Henry Wilson",
-    "size": "One Size"
+    "size": "S"
   },
   {
-    "id": 45,
-    "name": "Cityscape Cufflinks",
-    "price": 29.99,
-    "image": "/assets/product45.jpg",
-    "category": "Urban",
+    "id": 30,
+    "name": "Starry Night Hoodie",
+    "price": 64.99,
+    "image": "https://images.unsplash.com/photo-1556821840-3a63f95609a7",
+    "category": "Hoodie",
     "artist": "Victoria Lee",
-    "size": "One Size"
-  },
-  {
-    "id": 46,
-    "name": "Abstract Face Mask",
-    "price": 9.99,
-    "image": "/assets/product46.jpg",
-    "category": "Abstract",
-    "artist": "Leo Martinez",
-    "size": "One Size"
-  },
-  {
-    "id": 47,
-    "name": "Butterfly Wing Scarf",
-    "price": 27.99,
-    "image": "/assets/product47.jpg",
-    "category": "Nature",
-    "artist": "Chloe Taylor",
-    "size": "One Size"
-  },
-  {
-    "id": 48,
-    "name": "Graffiti Print Sneakers",
-    "price": 59.99,
-    "image": "/assets/product48.jpg",
-    "category": "Urban",
-    "artist": "Oscar Garcia",
-    "size": "9"
+    "size": "XL"
   }
 ]
