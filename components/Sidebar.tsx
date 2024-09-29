@@ -1,24 +1,24 @@
 // components/Sidebar.tsx
-import React from "react";
-import { X } from "lucide-react";
-import { Slider } from "@/components/ui/slider";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface SidebarProps {
   filters: {
     category: string;
-    priceRange: number[];
+    priceRange: [number, number];
     size: string;
     artist: string;
+    search: string;
   };
-  categories: string[];
   sizes: string[];
   artists: string[];
   setFilters: React.Dispatch<
     React.SetStateAction<{
       category: string;
-      priceRange: number[];
+      priceRange: [number, number];
       size: string;
       artist: string;
+      search: string;
     }>
   >;
   isMobileOpen: boolean;
@@ -27,125 +27,138 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({
   filters,
-  categories,
   sizes,
   artists,
   setFilters,
   isMobileOpen,
   onMobileClose,
 }) => {
-  const handleFilterChange = (
-    key: keyof typeof filters,
-    value: string | number[]
-  ) => {
-    setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
+  const [expandedSections, setExpandedSections] = useState({
+    priceRange: true,
+    sizes: true,
+  });
+
+  const toggleSection = (section: keyof typeof expandedSections) => {
+    setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
   return (
-    <>
-      {/* Mobile Overlay */}
-      {isMobileOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={onMobileClose}
-        />
-      )}
-
-      {/* Sidebar */}
-      <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform transition-transform duration-300 ease-in-out overflow-y-auto
-          ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} 
-          lg:sticky lg:top-0 lg:translate-x-0 lg:h-screen`}
+    <div
+      className={`bg-white p-4 rounded-lg shadow-md px-8 py-16 ${
+        isMobileOpen ? "fixed inset-0 z-50 overflow-y-auto" : "hidden lg:block"
+      } lg:sticky lg:top-24 lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto`}
+    >
+      <button
+        onClick={onMobileClose}
+        className="lg:hidden w-full text-left mb-4 font-semibold text-neutral-950"
       >
-        <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="text-xl font-semibold">Filters</h2>
-          <button onClick={onMobileClose} className="lg:hidden">
-            <X size={24} />
-          </button>
-        </div>
+        Close Filters
+      </button>
 
-        <div className="p-4 space-y-6">
-          {/* Category Filter */}
+      {/* Price Range */}
+      <div className="mb-6">
+        <button
+          className="flex justify-between items-center w-full text-left font-semibold mb-2"
+          onClick={() => toggleSection("priceRange")}
+        >
+          Price Range
+          {expandedSections.priceRange ? (
+            <ChevronUp size={20} />
+          ) : (
+            <ChevronDown size={20} />
+          )}
+        </button>
+        {expandedSections.priceRange && (
           <div>
-            <h3 className="font-semibold mb-3 text-lg">Category</h3>
-            <div className="space-y-2">
-              {categories.map((cat) => (
-                <label key={cat} className="flex items-center cursor-pointer">
-                  <input
-                    type="radio"
-                    name="category"
-                    value={cat}
-                    checked={filters.category === cat}
-                    onChange={(e) =>
-                      handleFilterChange("category", e.target.value)
-                    }
-                    className="mr-3 form-radio text-blue-600"
-                  />
-                  <span className="text-gray-700">{cat}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Price Range Filter */}
-          <div>
-            <h3 className="font-semibold mb-3 text-lg">Price Range</h3>
-            <Slider
-              min={0}
-              max={100}
-              step={5}
-              value={filters.priceRange}
-              onValueChange={(value) => handleFilterChange("priceRange", value)}
+            <input
+              type="range"
+              min="0"
+              max="1000"
+              value={filters.priceRange[1]}
+              onChange={(e) =>
+                setFilters((prev) => ({
+                  ...prev,
+                  priceRange: [prev.priceRange[0], parseInt(e.target.value)],
+                }))
+              }
+              className="w-full"
             />
-            <div className="flex justify-between mt-2 text-sm text-gray-600">
-              <span>${filters.priceRange[0]}</span>
+            <div className="flex justify-between">
+              <span>$0</span>
               <span>${filters.priceRange[1]}</span>
             </div>
           </div>
+        )}
+      </div>
 
-          {/* Size Filter */}
-          <div>
-            <h3 className="font-semibold mb-3 text-lg">Size</h3>
-            <div className="flex flex-wrap gap-2">
-              {sizes.map((size) => (
-                <button
-                  key={size}
-                  className={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
-                    filters.size === size
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-                  }`}
-                  onClick={() =>
-                    handleFilterChange(
-                      "size",
-                      size === filters.size ? "All" : size
-                    )
+      {/* Sizes */}
+      <div className="mb-6">
+        <button
+          className="flex justify-between items-center w-full text-left font-semibold mb-2"
+          onClick={() => toggleSection("sizes")}
+        >
+          Sizes
+          {expandedSections.sizes ? (
+            <ChevronUp size={20} />
+          ) : (
+            <ChevronDown size={20} />
+          )}
+        </button>
+        {expandedSections.sizes && (
+          <div className="space-y-2">
+            {sizes.map((size) => (
+              <label key={size} className="flex items-center">
+                <input
+                  type="radio"
+                  name="size"
+                  value={size}
+                  checked={filters.size === size}
+                  onChange={(e) =>
+                    setFilters((prev) => ({ ...prev, size: e.target.value }))
                   }
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
+                  className="mr-2"
+                />
+                {size}
+              </label>
+            ))}
           </div>
+        )}
+      </div>
 
-          {/* Artist Filter */}
-          <div>
-            <h3 className="font-semibold mb-3 text-lg">Artist</h3>
-            <select
-              className="w-full p-2 border rounded-md bg-white text-gray-700"
-              value={filters.artist}
-              onChange={(e) => handleFilterChange("artist", e.target.value)}
-            >
-              {artists.map((artist) => (
-                <option key={artist} value={artist}>
-                  {artist}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </aside>
-    </>
+      {/* Artists Dropdown */}
+      <div className="mb-6">
+        <p className="font-semibold mb-2">Artists</p>
+        <select
+          value={filters.artist}
+          onChange={(e) =>
+            setFilters((prev) => ({ ...prev, artist: e.target.value }))
+          }
+          className="w-full border rounded-md py-2 px-3"
+        >
+          {artists.map((artist) => (
+            <option key={artist} value={artist}>
+              {artist}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Reset Filters */}
+      <button
+        onClick={() =>
+          setFilters({
+            category: "All",
+            priceRange: [0, 1000],
+            size: "All",
+            artist: "All",
+            search: "",
+          })
+        }
+        className="w-full bg-neutral-950 text-white py-2 rounded-md font-semibold hover:bg-neutral-800 transition-colors"
+      >
+        Reset All Filters
+      </button>
+    </div>
   );
 };
 
