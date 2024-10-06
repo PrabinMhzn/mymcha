@@ -31,8 +31,6 @@ export default function Signup() {
     bio: "",
     website: "",
     instagram: "",
-    profileImage: null as File | null,
-    portfolioImages: [] as File[],
   });
 
   const handleInputChange = (
@@ -40,17 +38,6 @@ export default function Signup() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, files } = e.target;
-    if (files) {
-      if (name === "profileImage") {
-        setFormData((prev) => ({ ...prev, [name]: files[0] }));
-      } else if (name === "portfolioImages") {
-        setFormData((prev) => ({ ...prev, [name]: Array.from(files) }));
-      }
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,35 +60,6 @@ export default function Signup() {
 
       if (user) {
         // Upload profile image if provided
-        let profileImageUrl = null;
-        if (formData.profileImage) {
-          const { error: imageError } = await supabase.storage
-            .from("profile-images")
-            .upload(`${user.id}/profile.jpg`, formData.profileImage);
-          if (imageError) throw imageError;
-          profileImageUrl =
-            supabase.storage
-              .from("profile-images")
-              .getPublicUrl(`${user.id}/profile.jpg`)?.data?.publicUrl ?? null;
-        }
-
-        // Upload portfolio images if provided
-        const portfolioImageUrls: string[] = [];
-        if (isArtist && formData.portfolioImages.length > 0) {
-          for (let i = 0; i < formData.portfolioImages.length; i++) {
-            const { error: imageError } = await supabase.storage
-              .from("portfolio-images")
-              .upload(
-                `${user.id}/portfolio-${i}.jpg`,
-                formData.portfolioImages[i]
-              );
-            if (imageError) throw imageError;
-            const url = supabase.storage
-              .from("portfolio-images")
-              .getPublicUrl(`${user.id}/portfolio-${i}.jpg`)?.data?.publicUrl;
-            if (url) portfolioImageUrls.push(url);
-          }
-        }
 
         // Insert user profile data
         const { error: profileError } = await supabase.from("profiles").insert({
@@ -114,8 +72,6 @@ export default function Signup() {
           bio: isArtist ? formData.bio : null,
           website: isArtist ? formData.website : null,
           instagram: isArtist ? formData.instagram : null,
-          profile_image_url: profileImageUrl,
-          portfolio_image_urls: isArtist ? portfolioImageUrls : null,
         });
 
         if (profileError) throw profileError;
@@ -284,34 +240,8 @@ export default function Signup() {
                     />
                   </div>
                 </div>
-
-                <div>
-                  <Label htmlFor="portfolioImages">
-                    Portfolio Images (up to 5)
-                  </Label>
-                  <Input
-                    id="portfolioImages"
-                    name="portfolioImages"
-                    type="file"
-                    accept="image/*"
-                    multiple
-                    max={5}
-                    onChange={handleFileChange}
-                  />
-                </div>
               </>
             )}
-
-            <div>
-              <Label htmlFor="profileImage">Profile Image</Label>
-              <Input
-                id="profileImage"
-                name="profileImage"
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
-            </div>
 
             <Button type="submit" className="w-full" disabled={isLoading}>
               {isLoading ? (
