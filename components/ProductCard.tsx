@@ -7,13 +7,14 @@ import Image from "next/image";
 import { useCart } from "@/components/CartContext";
 import { ShoppingCart } from "lucide-react";
 import ProductModal from "./ProductModal";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/utils/supabase/client";
 
 interface ProductCardProps {
   productId: string | number;
   viewMode: "grid" | "list";
 }
 
+const supabase = createClient();
 const ProductCard: React.FC<ProductCardProps> = ({ productId, viewMode }) => {
   const { addToCart } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);

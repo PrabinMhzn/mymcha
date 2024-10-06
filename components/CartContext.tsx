@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/utils/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface Product {
@@ -35,6 +35,8 @@ interface CartContextType {
   cartTotal: number;
   isLoading: boolean;
 }
+
+const supabase = createClient();
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 

@@ -9,8 +9,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/contexts/AuthContext";
-import { supabase } from "@/lib/supabaseClient";
+import { createClient } from "@/utils/supabase/client";
 
+const supabase = createClient();
 export default function Signup() {
   const router = useRouter();
   const { signup } = useAuth();
@@ -74,32 +75,31 @@ export default function Signup() {
         // Upload profile image if provided
         let profileImageUrl = null;
         if (formData.profileImage) {
-          const { data: imageData, error: imageError } = await supabase.storage
+          const { error: imageError } = await supabase.storage
             .from("profile-images")
             .upload(`${user.id}/profile.jpg`, formData.profileImage);
           if (imageError) throw imageError;
-          profileImageUrl = supabase.storage
-            .from("profile-images")
-            .getPublicUrl(`${user.id}/profile.jpg`).data.publicUrl;
+          profileImageUrl =
+            supabase.storage
+              .from("profile-images")
+              .getPublicUrl(`${user.id}/profile.jpg`)?.data?.publicUrl ?? null;
         }
 
         // Upload portfolio images if provided
-        let portfolioImageUrls = [];
+        const portfolioImageUrls: string[] = [];
         if (isArtist && formData.portfolioImages.length > 0) {
           for (let i = 0; i < formData.portfolioImages.length; i++) {
-            const { data: imageData, error: imageError } =
-              await supabase.storage
-                .from("portfolio-images")
-                .upload(
-                  `${user.id}/portfolio-${i}.jpg`,
-                  formData.portfolioImages[i]
-                );
+            const { error: imageError } = await supabase.storage
+              .from("portfolio-images")
+              .upload(
+                `${user.id}/portfolio-${i}.jpg`,
+                formData.portfolioImages[i]
+              );
             if (imageError) throw imageError;
-            portfolioImageUrls.push(
-              supabase.storage
-                .from("portfolio-images")
-                .getPublicUrl(`${user.id}/portfolio-${i}.jpg`).data.publicUrl
-            );
+            const url = supabase.storage
+              .from("portfolio-images")
+              .getPublicUrl(`${user.id}/portfolio-${i}.jpg`)?.data?.publicUrl;
+            if (url) portfolioImageUrls.push(url);
           }
         }
 
