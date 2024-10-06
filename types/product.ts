@@ -9,4 +9,15 @@ export interface Product {
   artist: string;
   createdAt?: string | Date; // Make it optional with '?'
   // ... any other properties
+  quantity?: number;
+}
+export interface Artist {
+  id: number;
+  name: string;
+  genre: string;
+}
+
+export interface User {
+  id: string;
+  email?: string;
 }

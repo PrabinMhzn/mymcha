@@ -1,78 +1,81 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { createClient } from "@/utils/supabase/client";
 
-const artists = [
-  {
-    id: 1,
-    name: "Alex Johnson",
-    image: "/images/alex-johnson.jpg",
-    description:
-      "Specializing in vibrant, abstract designs inspired by urban landscapes.",
-  },
-  {
-    id: 2,
-    name: "Sarah Lee",
-    image: "/images/sarah-lee.jpg",
-    description:
-      "Creating minimalist designs with a focus on geometric patterns and shapes.",
-  },
-  {
-    id: 3,
-    name: "Michael Chen",
-    image: "/images/michael-chen.jpg",
-    description:
-      "Blending traditional Asian art styles with modern graphic design techniques.",
-  },
-  {
-    id: 4,
-    name: "Emily Rodriguez",
-    image: "/images/emily-rodriguez.jpg",
-    description:
-      "Exploring the intersection of nature and technology through digital illustrations.",
-  },
-  {
-    id: 5,
-    name: "David Kim",
-    image: "/images/david-kim.jpg",
-    description:
-      "Crafting whimsical character designs inspired by pop culture and anime.",
-  },
-  {
-    id: 6,
-    name: "Olivia Patel",
-    image: "/images/olivia-patel.jpg",
-    description:
-      "Merging fashion photography with digital art to create unique apparel designs.",
-  },
-];
+interface Artist {
+  id: number;
+  name: string;
+  image: string;
+  description: string;
+}
 
-const featuredDesigns = [
-  {
-    id: 1,
-    name: "Urban Rhythm",
-    artist: "Alex Johnson",
-    image: "/images/urban-rhythm.jpg",
-  },
-  {
-    id: 2,
-    name: "Geometric Harmony",
-    artist: "Sarah Lee",
-    image: "/images/geometric-harmony.jpg",
-  },
-  {
-    id: 3,
-    name: "Zen Garden",
-    artist: "Michael Chen",
-    image: "/images/zen-garden.jpg",
-  },
-];
+interface FeaturedDesign {
+  id: number;
+  name: string;
+  artist: string;
+  image: string;
+}
+
+async function fetchArtists() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("artists")
+    .select("id, name, image, description");
+
+  if (error) {
+    console.error("Error fetching artists:", error);
+    return [];
+  }
+
+  return data || [];
+}
+
+async function fetchFeaturedDesigns() {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("featured_designs")
+    .select("id, name, artist, image");
+
+  if (error) {
+    console.error("Error fetching featured designs:", error);
+    return [];
+  }
+
+  return data || [];
+}
 
 export default function ArtistsPage() {
+  const [artists, setArtists] = useState<Artist[]>([]);
+  const [featuredDesigns, setFeaturedDesigns] = useState<FeaturedDesign[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      const [fetchedArtists, fetchedDesigns] = await Promise.all([
+        fetchArtists(),
+        fetchFeaturedDesigns(),
+      ]);
+      setArtists(fetchedArtists);
+      setFeaturedDesigns(fetchedDesigns);
+      setIsLoading(false);
+    }
+
+    loadData();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-2xl">Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen relative pt-24">
       <div className="relative z-10">
@@ -99,7 +102,9 @@ export default function ArtistsPage() {
                     alt={design.name}
                     width={400}
                     height={400}
-                    className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                    layout="responsive"
+                    objectFit="cover"
+                    className="transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="text-center text-white">
@@ -125,13 +130,15 @@ export default function ArtistsPage() {
                   transition={{ type: "spring", stiffness: 300 }}
                   className="bg-white rounded-lg shadow-lg overflow-hidden transition-transform duration-300"
                 >
-                  <Image
-                    src={artist.image}
-                    alt={artist.name}
-                    width={400}
-                    height={300}
-                    className="w-full h-64 object-cover transition-transform duration-300"
-                  />
+                  <div className="relative h-64">
+                    <Image
+                      src={artist.image}
+                      alt={artist.name}
+                      layout="fill"
+                      objectFit="cover"
+                      className="transition-transform duration-300"
+                    />
+                  </div>
                   <div className="p-6">
                     <h2 className="text-xl font-bold mb-2">{artist.name}</h2>
                     <p className="text-gray-600 mb-4">{artist.description}</p>
