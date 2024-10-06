@@ -2,16 +2,31 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isArtist, setIsArtist] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const { login } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
-    console.log("Login submitted", { email, password, isArtist });
+    setError(null);
+    try {
+      await login(email, password);
+      // If login is successful, redirect to appropriate page
+      router.push(isArtist ? "/artist-dashboard" : "/dashboard");
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unknown error occurred");
+      }
+    }
   };
 
   return (
@@ -57,6 +72,7 @@ export default function Login() {
             />
             <label htmlFor="isArtist">I am an artist</label>
           </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
           <button
             type="submit"
             className="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition duration-300"

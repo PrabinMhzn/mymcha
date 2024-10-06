@@ -202,7 +202,7 @@ export default function Shop() {
                 {sortedProducts.map((product) => (
                   <ProductCard
                     key={product.id}
-                    product={product}
+                    productId={product.id}
                     viewMode={viewMode}
                   />
                 ))}
