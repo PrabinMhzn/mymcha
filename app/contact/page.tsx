@@ -11,8 +11,8 @@ const ContactPage = () => {
           Get in Touch
         </h1>
         <p className="text-lg text-gray-600 mb-24 text-center">
-          We’re here to help! Whether you have questions about our products or
-          need assistance, feel free to reach out.
+          We&apos;re here to help! Whether you have questions about our products
+          or need assistance, feel free to reach out.
         </p>
 
         {/* Contact Information Section */}
