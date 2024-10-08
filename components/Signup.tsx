@@ -5,13 +5,10 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Loader2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/contexts/AuthContext";
-import { createClient } from "@/utils/supabase/client";
+import { BaseForm } from "@/components/BaseForm";
+import { ArtistForm } from "@/components/ArtistForm";
 
-const supabase = createClient();
 export default function Signup() {
   const router = useRouter();
   const { signup } = useAuth();
@@ -55,35 +52,28 @@ export default function Signup() {
     }
 
     try {
-      // Sign up the user
-      const { user } = await signup(formData.email, formData.password);
+      console.log("Submitting signup form:", {
+        ...formData,
+        password: "[REDACTED]",
+      });
+      const { user } = await signup(
+        formData.email,
+        formData.password,
+        isArtist ? "artist" : "user",
+        formData.firstName,
+        formData.lastName
+      );
 
       if (user) {
-        // Upload profile image if provided
-
-        // Insert user profile data
-        const { error: profileError } = await supabase.from("profiles").insert({
-          id: user.id,
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          is_artist: isArtist,
-          artist_name: isArtist ? formData.artistName : null,
-          bio: isArtist ? formData.bio : null,
-          website: isArtist ? formData.website : null,
-          instagram: isArtist ? formData.instagram : null,
-        });
-
-        if (profileError) throw profileError;
-
+        console.log("Signup successful, user:", user);
         setNotification({
           type: "success",
-          message: "Account created successfully!",
+          message:
+            "Account created successfully! Please check your email to confirm your account.",
         });
 
-        // Redirect to appropriate dashboard
         setTimeout(
-          () => router.push(isArtist ? "/artist-dashboard" : "/dashboard"),
+          () => router.push(isArtist ? "/artist/dashboard" : "/dashboard"),
           2000
         );
       }
@@ -92,7 +82,9 @@ export default function Signup() {
       setNotification({
         type: "error",
         message:
-          error instanceof Error ? error.message : "An unknown error occurred",
+          error instanceof Error
+            ? error.message
+            : "An unknown error occurred during signup",
       });
     } finally {
       setIsLoading(false);
@@ -130,117 +122,16 @@ export default function Signup() {
               </label>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="firstName">First Name</Label>
-                <Input
-                  id="firstName"
-                  name="firstName"
-                  type="text"
-                  required
-                  value={formData.firstName}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <Label htmlFor="lastName">Last Name</Label>
-                <Input
-                  id="lastName"
-                  name="lastName"
-                  type="text"
-                  required
-                  value={formData.lastName}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-              <div>
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <Input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
+            <BaseForm
+              formData={formData}
+              handleInputChange={handleInputChange}
+            />
 
             {isArtist && (
-              <>
-                <div>
-                  <Label htmlFor="artistName">Artist Name</Label>
-                  <Input
-                    id="artistName"
-                    name="artistName"
-                    type="text"
-                    required
-                    value={formData.artistName}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="bio">Bio</Label>
-                  <Textarea
-                    id="bio"
-                    name="bio"
-                    rows={4}
-                    required
-                    value={formData.bio}
-                    onChange={handleInputChange}
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                  <div>
-                    <Label htmlFor="website">Website (optional)</Label>
-                    <Input
-                      id="website"
-                      name="website"
-                      type="url"
-                      value={formData.website}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="instagram">Instagram (optional)</Label>
-                    <Input
-                      id="instagram"
-                      name="instagram"
-                      type="text"
-                      value={formData.instagram}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                </div>
-              </>
+              <ArtistForm
+                formData={formData}
+                handleInputChange={handleInputChange}
+              />
             )}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
